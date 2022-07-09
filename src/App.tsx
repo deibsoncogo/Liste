@@ -1,7 +1,7 @@
-import './App.css'
+import './App.scss'
 
 export function App() {
   return (
-    <div />
+    <div>App</div>
   )
 }
