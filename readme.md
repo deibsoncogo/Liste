@@ -1,9 +1,2 @@
-# Titulo do repositório
-Descrição do repositório
-
-## Ajustes ao repositório atual
-[] Renomear titulo e descrição
-[] Criar estes arquivos
-    * package.json
-    * .env
-    * notes.md
+# Liste | Deibson Cogo
+Um site para responsável pro criar listas, para confirmar presença ou realizar votação

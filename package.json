@@ -1,0 +1,10 @@
+{
+  "name": "liste",
+  "version": "1.0.0",
+  "description": "Um site para responsável pro criar listas, para confirmar presença ou realizar votação",
+  "main": "index.js",
+  "repository": "https://github.com/deibsoncogo/Liste.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true
+}
