@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
 
 type TUser = {
   id: string
@@ -11,6 +11,7 @@ type TUser = {
 type TAuthContext = {
   user: TUser | undefined;
   SignInWithGoogle: () => Promise<void>;
+  SignOutGeneral: () => Promise<void>;
 }
 
 type TAuthContextProvider = {
@@ -44,8 +45,6 @@ export function AuthContextProvider(props: TAuthContextProvider) {
 
     const response = await signInWithPopup(auth, provider)
 
-    console.log('response =>', typeof response, response)
-
     if (response.user) {
       const { uid, displayName, photoURL, email } = response.user
 
@@ -57,8 +56,13 @@ export function AuthContextProvider(props: TAuthContextProvider) {
     }
   }
 
+  async function SignOutGeneral() {
+    await signOut(auth)
+    setUser(undefined)
+  }
+
   return (
-    <AuthContext.Provider value={{ user, SignInWithGoogle }}>
+    <AuthContext.Provider value={{ user, SignInWithGoogle, SignOutGeneral }}>
       {props.children}
     </AuthContext.Provider>
   )
