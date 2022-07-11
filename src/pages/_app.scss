@@ -15,6 +15,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 html {
@@ -47,5 +48,6 @@ a {
 
 
 button {
+  border: 0;
   cursor: pointer;
 }
