@@ -6,6 +6,7 @@ import './_app.scss'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthContextProvider>
+      <title>Liste</title>
       <Component {...pageProps} />
     </AuthContextProvider>
   )
