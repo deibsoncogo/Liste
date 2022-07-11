@@ -1,5 +1,7 @@
 {
   "rules": {
+    "react/destructuring-assignment": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "react/jsx-props-no-spreading": "off",
     "jsx-quotes": ["error", "prefer-single"],
     "semi": ["error", "never"], // proíbe o uso de ponto e virgula
