@@ -12,10 +12,10 @@ export function Header() {
         <div className={style.information}>
           <Image width={50} height={50} src={user?.avatar} objectFit='cover' className={style.avatar} />
 
-          <div className={style.text}>
-            <strong>{user?.name}</strong>
+          <span className={style.text}>
+            <p>{user?.name}</p>
             <p>{user?.email}</p>
-          </div>
+          </span>
         </div>
       )}
 

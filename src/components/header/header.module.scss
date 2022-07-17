@@ -1,8 +1,8 @@
-.container {
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
 
   width: 100vw;
@@ -13,8 +13,8 @@
 
   background-color: var(--backgroundColor2);
 
-  &#user {
-    justify-content: center;
+  &.spaceBetween {
+    justify-content: space-between;
   }
 
   .information {
@@ -28,8 +28,12 @@
     }
 
     .text {
-      line-height: 20px;
       margin-left: 10px;
+
+      p:first-child {
+        font: normal bolder normal 18px 'Taviraj', serif;
+        line-height: 20px;
+      }
     }
   }
 }
