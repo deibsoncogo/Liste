@@ -7,7 +7,7 @@ export function Header() {
   const { user } = UseAuth()
 
   return (
-    <div id={!user && style.user} className={style.container}>
+    <div className={`${style.header} ${user ? style.spaceBetween : ''}`}>
       {user && (
         <div className={style.information}>
           <Image width={50} height={50} src={user?.avatar} objectFit='cover' className={style.avatar} />
