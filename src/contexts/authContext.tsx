@@ -41,12 +41,9 @@ export function AuthContextProvider({ children }: TAuthContextProvider) {
   }, [auth])
 
   async function SignInWithGoogle() {
-    console.log(5)
     const provider = new GoogleAuthProvider()
 
     const response = await signInWithPopup(auth, provider)
-
-    console.log('response =>', typeof response, response)
 
     if (response.user) {
       const { uid, displayName, photoURL, email } = response.user
