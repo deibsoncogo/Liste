@@ -16,11 +16,13 @@
     }
 
     &.entrar:hover:enabled {
-      color: #88ff8e
+      color: var(--green);
+      opacity: 90%;
     }
 
     &.sair:hover:enabled {
-      color: #ff6c6c
+      color: var(--red);
+      opacity: 90%;
     }
 
     &:disabled {

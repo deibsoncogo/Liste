@@ -4,9 +4,7 @@
   align-items: center;
   justify-content: center;
 
-
-  width: 100vw;
-  max-width: 400px;
+  width: 100%;
   height: 72px;
   border-radius: 10px;
   padding: 10px;
@@ -28,7 +26,15 @@
     }
 
     .text {
-      margin-left: 10px;
+      width: 279px;
+      margin: 0px 10px;
+
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+      }
 
       p:first-child {
         font: normal bolder normal 18px 'Taviraj', serif;
