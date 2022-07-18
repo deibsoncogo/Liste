@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { UseAuth } from '../../contexts/authContext'
-import { Login } from '../login/login'
-import style from './header.module.scss'
+import { Login } from '../login'
+import style from './style.module.scss'
 
 export function Header() {
   const { user } = UseAuth()

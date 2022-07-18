@@ -1,11 +1,11 @@
 import { UseAuth } from '../../contexts/authContext'
-import style from './login.module.scss'
+import style from './style.module.scss'
 
 export function Login() {
   const { user, SignInWithGoogle, SignOutGeneral } = UseAuth()
 
   return (
-    <div className={style.container}>
+    <div className={style.login}>
       {user ? (
         <button
           type='button'
