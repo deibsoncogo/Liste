@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { getDatabase, ref, update } from 'firebase/database'
 
 type TUser = {
   id: string
@@ -41,18 +42,23 @@ export function AuthContextProvider({ children }: TAuthContextProvider) {
   }, [auth])
 
   async function SignInWithGoogle() {
-    const provider = new GoogleAuthProvider()
+    try {
+      const provider = new GoogleAuthProvider()
 
-    const response = await signInWithPopup(auth, provider)
+      const response = await signInWithPopup(auth, provider)
 
-    if (response.user) {
-      const { uid, displayName, photoURL, email } = response.user
+      if (response.user) {
+        const { uid, displayName, photoURL, email } = response.user
 
-      if (!uid || !displayName || !photoURL || !email) {
-        throw new Error('Existe informação importante da conta faltando')
+        if (!uid || !displayName || !photoURL || !email) {
+          throw new Error('Existe informação importante da conta faltando')
+        }
+
+        await update(ref(getDatabase(), `users/${uid}`), { name: displayName })
+        setUser({ id: uid, name: displayName, avatar: photoURL, email })
       }
-
-      setUser({ id: uid, name: displayName, avatar: photoURL, email })
+    } catch (error) {
+      console.log('error =>', error)
     }
   }
 
