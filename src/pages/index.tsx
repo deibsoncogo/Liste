@@ -1,10 +1,7 @@
-import { Header } from '../components/header'
 import style from './index.module.scss'
 
-export default function Home() {
+export default function Index() {
   return (
-    <div className={style.home}>
-      <Header />
-    </div>
+    <div className={style.index} />
   )
 }

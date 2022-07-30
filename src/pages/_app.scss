@@ -14,17 +14,20 @@
 * {
   margin: 0;
   padding: 0;
-  font: normal 400 normal 16px 'Fira Sans', 'Taviraj', sans-serif, serif;
   box-sizing: border-box;
+  font: normal 400 normal 16px 'Fira Sans', 'Taviraj', sans-serif, serif;
 }
 
 html {
+  padding: 20px;
   background-color: var(--backgroundColor1);
   color: var(--font);
 }
 
 body {
-  margin: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+
   cursor: default;
 }
 
@@ -33,7 +36,6 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
 
 button {
   border: 0;
