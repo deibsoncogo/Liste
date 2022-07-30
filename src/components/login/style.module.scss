@@ -37,21 +37,4 @@
       }
     }
   }
-
-  .button {
-    color: var(--green);
-    font: normal 800 normal 18px 'Fira Sans', sans-serif;
-
-    &:hover {
-      opacity: 90%;
-    }
-
-    &.signOut {
-      color: var(--red);
-    }
-
-    &.signOut:hover {
-      opacity: 90%;
-    }
-  }
 }

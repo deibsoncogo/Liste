@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { UseAuth } from '../../contexts/authContext'
+import { Button } from '../button'
 import style from './style.module.scss'
 
 export function Login() {
@@ -18,26 +19,10 @@ export function Login() {
             </span>
           </div>
 
-          <button
-            type='button'
-            name='signOut'
-            disabled={!user}
-            onClick={SignOutGeneral}
-            className={`${style.button} ${style.signOut}`}
-          >
-            sair
-          </button>
+          <Button type='button' text='sair' color='var(--red)' onClick={() => SignOutGeneral()} />
         </>
       ) : (
-        <button
-          type='button'
-          name='signIn'
-          disabled={!!user}
-          onClick={SignInWithGoogle}
-          className={`${style.button} ${style.signIn}`}
-        >
-          entrar
-        </button>
+        <Button type='button' text='entrar' color='var(--green)' onClick={() => SignInWithGoogle()} />
       )}
     </div>
   )

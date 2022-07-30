@@ -1,0 +1,13 @@
+.button {
+  font: normal 800 normal 18px 'Fira Sans', sans-serif;
+  text-transform: lowercase;
+
+  &:hover, &:focus {
+    opacity: 90%;
+  }
+
+  &:focus {
+    outline: 0;
+    text-decoration: underline;
+  }
+}
