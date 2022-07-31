@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
-import { getDatabase, ref, update } from 'firebase/database'
+import { UseDatabase } from './databaseContext'
 
-type TUser = {
+type TUserAuth = {
   id: string
   name: string
   avatar: string
@@ -10,65 +10,68 @@ type TUser = {
 }
 
 type TAuthContext = {
-  user: TUser | undefined;
-  SignInWithGoogle: () => Promise<void>;
-  SignOutGeneral: () => Promise<void>;
+  userAuth: TUserAuth | undefined
+  SignInWithGoogle: () => Promise<void>
+  SignOutGeneral: () => Promise<void>
 }
 
 type TAuthContextProvider = {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const AuthContext = createContext({} as TAuthContext)
 
 export function AuthContextProvider({ children }: TAuthContextProvider) {
-  const [user, setUser] = useState<TUser>()
+  const { Upsert } = UseDatabase()
+  const [userAuth, setUserAuth] = useState<TUserAuth>()
   const auth = getAuth()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (isUser) => {
-      if (isUser) {
-        const { uid, displayName, photoURL, email } = isUser
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, displayName, photoURL, email } = user
 
-        if (!uid || !displayName || !photoURL || !email) {
-          throw new Error('Existe informação importante da conta faltando')
-        }
+        const data = { id: uid, name: displayName, avatar: photoURL, email }
 
-        setUser({ id: uid, name: displayName, avatar: photoURL, email })
+        setUserAuth(data)
+
+        delete data.id
+        Upsert({ table: 'users', id: uid, data })
       }
     })
+  }, [auth, Upsert])
 
-    return () => { unsubscribe() }
-  }, [auth])
-
-  async function SignInWithGoogle() {
+  async function SignInWithGoogle(): Promise<void> {
     try {
-      const provider = new GoogleAuthProvider()
+      const { user } = await signInWithPopup(auth, new GoogleAuthProvider())
 
-      const response = await signInWithPopup(auth, provider)
+      if (user) {
+        const { uid, displayName, photoURL, email } = user
 
-      if (response.user) {
-        const { uid, displayName, photoURL, email } = response.user
+        const data = { id: uid, name: displayName, avatar: photoURL, email }
 
-        if (!uid || !displayName || !photoURL || !email) {
-          throw new Error('Existe informação importante da conta faltando')
-        }
+        setUserAuth(data)
 
-        await update(ref(getDatabase(), `users/${uid}`), { name: displayName })
-        setUser({ id: uid, name: displayName, avatar: photoURL, email })
+        delete data.id
+        Upsert({ table: 'users', id: uid, data })
       }
     } catch (error) {
-      console.log('error =>', error)
+      console.log('error signInWithPopup =>', error)
     }
   }
 
-  async function SignOutGeneral() {
+  async function SignOutGeneral(): Promise<void> {
     await signOut(auth)
-    setUser(undefined)
+    setUserAuth(undefined)
   }
 
   return (
-    <AuthContext.Provider value={{ user, SignInWithGoogle, SignOutGeneral }}>
+    <AuthContext.Provider value={{
+      userAuth,
+      SignInWithGoogle,
+      SignOutGeneral,
+    }}
+    >
       {children}
     </AuthContext.Provider>
   )

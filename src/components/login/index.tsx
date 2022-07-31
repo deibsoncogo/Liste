@@ -4,18 +4,24 @@ import { Button } from '../button'
 import style from './style.module.scss'
 
 export function Login() {
-  const { user, SignInWithGoogle, SignOutGeneral } = UseAuth()
+  const { userAuth, SignInWithGoogle, SignOutGeneral } = UseAuth()
 
   return (
-    <div className={`${style.login} ${user ? 'hasUser' : ''}`}>
-      {user ? (
+    <div className={`${style.login} ${userAuth ? 'hasUserAuth' : ''}`}>
+      {userAuth ? (
         <>
           <div className={style.information}>
-            <Image width={50} height={50} src={user?.avatar} objectFit='cover' className={style.avatar} />
+            <Image
+              width={50}
+              height={50}
+              src={userAuth?.avatar}
+              objectFit='cover'
+              className={style.avatar}
+            />
 
             <span className={style.text}>
-              <p>{user?.name}</p>
-              <p>{user?.email}</p>
+              <p>{userAuth?.name}</p>
+              <p>{userAuth?.email}</p>
             </span>
           </div>
 
