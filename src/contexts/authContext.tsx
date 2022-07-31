@@ -31,12 +31,8 @@ export function AuthContextProvider({ children }: TAuthContextProvider) {
       if (user) {
         const { uid, displayName, photoURL, email } = user
 
-        const data = { id: uid, name: displayName, avatar: photoURL, email }
-
-        setUserAuth(data)
-
-        delete data.id
-        Upsert({ table: 'users', id: uid, data })
+        setUserAuth({ id: uid, name: displayName, avatar: photoURL, email })
+        Upsert({ table: 'users', id: uid, data: { name: displayName, avatar: photoURL, email } })
       }
     })
   }, [auth, Upsert])
@@ -48,12 +44,8 @@ export function AuthContextProvider({ children }: TAuthContextProvider) {
       if (user) {
         const { uid, displayName, photoURL, email } = user
 
-        const data = { id: uid, name: displayName, avatar: photoURL, email }
-
-        setUserAuth(data)
-
-        delete data.id
-        Upsert({ table: 'users', id: uid, data })
+        setUserAuth({ id: uid, name: displayName, avatar: photoURL, email })
+        Upsert({ table: 'users', id: uid, data: { name: displayName, avatar: photoURL, email } })
       }
     } catch (error) {
       console.log('error signInWithPopup =>', error)
