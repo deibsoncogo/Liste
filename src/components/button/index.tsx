@@ -1,10 +1,11 @@
+import { MouseEventHandler } from 'react'
 import style from './style.module.scss'
 
 type TProps = {
   type: 'button' | 'submit'
   text: string
   color: string
-  onClick: () => void
+  onClick: MouseEventHandler<HTMLButtonElement>
 }
 
 export function Button({ type, text, color, onClick }: TProps) {
